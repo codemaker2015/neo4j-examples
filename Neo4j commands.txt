@@ -1,0 +1,28 @@
+CREATE (a:Person {name:'Ajith', born: 'Apr 10, 1996', linkedin:'@ajith'}) RETURN a
+CREATE (a:Person {name:'Ishani', born: 'Mar 8, 1998', linkedin:'@ishani'}) RETURN a
+CREATE (a:Person {name:'Gowri', born: 'Oct 16, 1998', linkedin:'@gowri'}) RETURN a
+CREATE (a:Person {name:'Vishnu', born: 'Dec 12, 1994', linkedin:'@codemaker2015'}) RETURN a
+
+CREATE (a:Sports {name:'Chess'}) RETURN a
+CREATE (a:Sports {name:'Cricket'}) RETURN a
+
+CREATE (a:Company {name:'ABC Company', location: "Ernakulam"}) RETURN a
+CREATE (a:Institution {name:'XYZ College', location: "Kochi"}) RETURN a
+
+MATCH (n) RETURN n LIMIT 25
+MATCH (a {name: 'Vishnu'}) RETURN a
+
+MATCH (a:Person), (b:Sports) WHERE (a.name = 'Vishnu' OR a.name = 'Ajith') AND b.name = 'Cricket' CREATE (a)-[r:PLAYS]->(b)
+MATCH (a:Person), (b:Sports) WHERE (a.name = 'Vishnu' OR a.name = 'Gowri' OR a.name = 'Ishani') AND b.name = 'Chess' CREATE (a)-[r:PLAYS]->(b)
+
+
+MATCH (a:Person), (b:Institution) WHERE (a.name = 'Vishnu' OR a.name = 'Ishani') AND b.name = 'XYZ College' CREATE (a)-[r:ACADEMICS]->(b)
+MATCH (a:Person), (b:Company) WHERE (a.name = 'Vishnu' OR a.name = 'Gowri') AND b.name = 'ABC Company' CREATE (a)-[r:WORKS]->(b)
+
+
+MATCH (n {name: 'Ajith'})-[r:PLAYS]->() DELETE r
+MATCH (n {name: 'Ajith'}) DELETE n
+
+
+MATCH ()-[r]->() DELETE r;
+MATCH (a {name: 'Ajith'}) DELETE a
